@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">    
+    <title>Login</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/signin.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">    
+  </head>
+  <body class="text-center">    
+    <main class="form-signin">
+      <h1 class="h3 mb-3 fw-normal">Lista de Usuários</h1>
+      
+      <ul class="list-group">
+          <% for (user of users) { %>
+        <li class="list-group-item"><%= user.email %></li>
+         <% } %>
+      </ul>
+      
+        
+        <p class="mt-5 mb-3 text-muted">&copy; DH 2021</p>     
+    </main>
+  </body>
+</html>

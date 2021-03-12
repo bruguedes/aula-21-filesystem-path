@@ -1,0 +1,30 @@
+[
+	{
+		"email": "bruguedes@gmail.com",
+		"password": "$2b$10$D0Dr84CqdhUQmhksOTecoeP/6g3fBkySs5jfhLGqCBRIUvlZdhLVy"
+	},
+	{
+		"email": "usuario1@teste.com.br",
+		"password": "$2b$10$6fRdrH9q6R8sGr/g8FJQv.vDhHad2lTge7ahg7dbV7im2XKujaIuO"
+	},
+	{
+		"email": "usuario2@teste.com.br",
+		"password": "$2b$10$PASstYaGdcfR9stFK8rSPeaAJv9Fx6Jxey2z6NTEgiX8742uY2Oyq"
+	},
+	{
+		"email": "usuario3@teste.com.br",
+		"password": "$2b$10$dOyJqUL7Uq/uTSgd.IRHZOACzQj7IteseYYw7QDpf6FAWZ1N51Aby"
+	},
+	{
+		"email": "usuario4@teste.com.br",
+		"password": "$2b$10$GZXDubj3r.YAc1VHOuditeUohPi9R.8P3o3ydWISOK91lSwj7J9qm"
+	},
+	{
+		"email": "usuario5@teste.com.br",
+		"password": "$2b$10$fAg2F6BWP2k7aP1R1keaSOys25bULn8huKxUUVQCLKtcwYYrxh/iC"
+	},
+	{
+		"email": "usuario6@teste.com.br",
+		"password": "$2b$10$Nxcb3s.qJj55KFsHsYC15OtpaOCa3GM/6E22K/qkCugwgaZ2SFsU."
+	}
+]
