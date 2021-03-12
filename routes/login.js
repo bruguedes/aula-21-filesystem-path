@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
 const controller = require('../controller/login')
 
 // GET /login
@@ -15,7 +14,7 @@ router.get('/cadastro', controller.cadastro);
 // POST /login/cadastro
 router.post('/cadastro', controller.novoCadastro);
 
-// GET /login/cadastro
+// GET /login/listaUsuário
 router.get('/userList', controller.usersList);
 
 
