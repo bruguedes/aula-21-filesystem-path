@@ -26,5 +26,13 @@
 	{
 		"email": "usuario6@teste.com.br",
 		"password": "$2b$10$Nxcb3s.qJj55KFsHsYC15OtpaOCa3GM/6E22K/qkCugwgaZ2SFsU."
+	},
+	{
+		"email": "leo.maga17@gmail.com",
+		"password": "$2b$10$xJXLhqlyIleMmJfrwBkoSuJpgOiT4k1WPuZkmykBoZDINeTIKFESK"
+	},
+	{
+		"email": "usuario41@teste.com.br",
+		"password": "$2b$10$V0tjb5H2AFtBA14P9huvWeOcKNxdOxHp6sDD68/w2sEUqlOKUYhyS"
 	}
 ]
