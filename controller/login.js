@@ -3,13 +3,12 @@ const path = require("path");
 const bcrypt = require("bcrypt");
 const filePath = path.join("static-database", "db.json");
 
-const getUsers = () => {
-  const data = fs.existsSync(filePath) ? fs.readFileSync(filePath) : [];
-  try {
-    return JSON.parse(data);
-  } catch (error) {
-    return [];
-  }
+const getJson = () => {
+  const data = fs.readFileSync(filePath, { encoding: "utf-8" });
+  return JSON.parse(data);
+};
+const getDataUser = (email, array) => {
+  return array.filter((user) => user.email === email);
 };
 
 const index = (req, res) => {
@@ -17,17 +16,17 @@ const index = (req, res) => {
 };
 
 const submit = (req, res) => {
-  const tableOfUsers = JSON.parse(
-    fs.readFileSync(filePath, { encoding: "utf-8" })
-  );
-  let userFilter = tableOfUsers.filter((user) => user.email === req.body.email);
-  if (userFilter.length <= 0) {
+  const { email, password } = req.body;
+  const users = getJson();
+  let [user] = getDataUser(email, users);
+
+  if (!user) {
     return res.render("login/authenticationError", { msg: "E-mail invalido" });
-  } else {
-    bcrypt.compareSync(req.body.password, userFilter[0].password)
-      ? res.redirect("/login/userList")
-      : res.render("login/authenticationError", { msg: "Senha inválida" });
   }
+  if (!bcrypt.compareSync(password, user.password)) {
+    return res.render("login/authenticationError", { msg: "Senha inválida" });
+  }
+  res.redirect("/login/userList");
 };
 
 const cadastro = (req, res) => {
@@ -35,16 +34,23 @@ const cadastro = (req, res) => {
 };
 
 const novoCadastro = (req, res) => {
-  const dadosJsonParse = getUsers();
-  dadosJsonParse.push({
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 10),
-  });
-  fs.writeFileSync(filePath, JSON.stringify(dadosJsonParse, null, "\t"));
-  res.redirect("/login");
+  const { email, password } = req.body;
+  const users = getJson();
+  let [user] = getDataUser(email, users);
+  if (user) {
+    return res.render("login/authenticationError", {
+      msg: "E-mail já cadastrado!",
+    })
+  }
+  const newPassword = bcrypt.hashSync(password, 10);
+  users.push({ email, password: newPassword });
+  fs.writeFileSync(filePath, JSON.stringify(users));
+  return res.redirect("/login");
+  
+  
 };
 const usersList = (req, res) => {
-  const users = getUsers();
+  const users = getJson();
   res.render("login/userList", { users });
 };
 
