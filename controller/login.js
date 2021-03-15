@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const bcrypt = require("bcrypt");
 const filePath = path.join("static-database", "db.json");
+const {check, validationResult, body} = require('express-validator')
 
 const getJson = () => {
   const data = fs.readFileSync(filePath, { encoding: "utf-8" });
@@ -10,6 +11,16 @@ const getJson = () => {
 const getDataUser = (email, array) => {
   return array.filter((user) => user.email === email);
 };
+
+const emailExist = (email)=>{
+  const users = getJson();
+    let [user] = getDataUser(email, users);
+    if(!user){
+      return true
+    }
+    return false
+    
+}
 
 const index = (req, res) => {
   res.render("login/index");
@@ -34,19 +45,16 @@ const cadastro = (req, res) => {
 };
 
 const novoCadastro = (req, res) => {
-  const { email, password } = req.body;
-  const users = getJson();
-  let [user] = getDataUser(email, users);
-  if (user) {
-    return res.render("login/authenticationError", {
-      msg: "E-mail já cadastrado!",
-    })
-  }
-  const newPassword = bcrypt.hashSync(password, 10);
-  users.push({ email, password: newPassword });
-  fs.writeFileSync(filePath, JSON.stringify(users));
-  return res.redirect("/login");
-  
+  let erroValidation = validationResult(req);
+  if (erroValidation.isEmpty()) {
+    const { email, password } = req.body;
+    const users = getJson();
+    const newPassword = bcrypt.hashSync(password, 10);
+    users.push({ email, password: newPassword });
+    fs.writeFileSync(filePath, JSON.stringify(users));
+    return res.redirect("/login");
+  } 
+    res.render('login/cadastro', {errors:erroValidation.errors});
   
 };
 const usersList = (req, res) => {
@@ -60,4 +68,5 @@ module.exports = {
   cadastro,
   novoCadastro,
   usersList,
+  emailExist,
 };

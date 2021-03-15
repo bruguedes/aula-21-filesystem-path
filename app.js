@@ -5,6 +5,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
+const logMiddleware = require('./middlewares/logsRotas');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(logMiddleware.logRoutes);
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 
